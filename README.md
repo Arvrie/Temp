@@ -1,6 +1,5 @@
 # Temp
-Eine LED Leiste, die die Temperatur über einen Infrarot Sensor ausließt
-Ca. 1m Lang - 50LEDs
+An LED Strip - responsive to the temperature measured by an infra red sensor: For the Human Body - the higher the temperature the more LEDs glow
 
 Inspired by:
 http://voyoslo.com/projects/immaterials-wifi-light-painting/
