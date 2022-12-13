@@ -8,6 +8,7 @@
 
 float Temp = 0;
 int Temp_map=0;
+int old_temp_map=0;
 //int fadeAmount = 5; 
 
 WaveShare_MLX90614   MLX90614 = WaveShare_MLX90614();
@@ -24,26 +25,34 @@ void setup() {
 void loop() {
   strip.clear();
 
-/*
-  Temp_map = Temp_map + fadeAmount;
-  if (Temp_map <= 0 || Temp_map >= 144) {
-  fadeAmount = -fadeAmount;
-  }
-*/
-
   Temp = MLX90614.readObjectTemp();
+  old_temp_map = Temp_map;
   Temp_map = map(Temp,18, 36, 0, LED_COUNT );
-  strip.fill(strip.Color(255,0,0,0),0,Temp_map-1);
-
-  
-  strip.show();
+  if (old_temp_map > Temp_map){
+    while (old_temp_map > Temp_map) {
+    strip.clear();
+    strip.fill(strip.Color(255,0,0,0),0,old_temp_map-1);
+    strip.show();
+    old_temp_map--;
+    delay(100);
+  }
+  }
+  else if (old_temp_map < Temp_map){
+    while (old_temp_map < Temp_map) {
+    strip.clear();
+    strip.fill(strip.Color(255,0,0,0),0,old_temp_map-1);
+    strip.show();
+    old_temp_map++;
+    delay(100);
+  }
+  }
+  else {
+    strip.clear();
+    strip.fill(strip.Color(255,0,0,0),0,old_temp_map-1);
+    strip.show();
+  }
 
   Serial.print(" \tObject Temp: "); Serial.print(MLX90614.readObjectTemp()); Serial.println(" C");
   Serial.println();
 
 }
-
-
-
-
-
