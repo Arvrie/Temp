@@ -27,7 +27,7 @@ void loop() {
 
   Temp = MLX90614.readObjectTemp();
   old_temp_map = Temp_map;
-  Temp_map = map(Temp,18, 36, 0, LED_COUNT );
+  Temp_map = map(Temp*10,180, 360, 0, LED_COUNT );
   if (old_temp_map > Temp_map){
     while (old_temp_map > Temp_map) {
     strip.clear();
